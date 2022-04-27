@@ -2,32 +2,36 @@ const { application } = require('express');
 var express = require('express');
 var app = express();
 
+require('dotenv').config();
+
 const port = process.env.PORT || 3000;
+
+//Conexion a BD Mongo DB
+const mongoose = require('mongoose');
+
+
+//const uri = 'mongodb+srv://nodejs_yt:xSVhWhk7bRYv5GMI@cluster0.dfmua.mongodb.net/veterianaria?retryWrites=true&w=majority';
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
+mongoose.connect(uri)
+.then(() => console.log('BD Exito '))
+.catch(err => console.log("Error", err))
 
 //motor de plantillas
 app.set('view engine', 'ejs');
-app.set('views', __dirname+ '/views');
+app.set('views', __dirname + '/views');
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', (req,res) => {
-    res.render("index", {title: "dinamico"})
-})
+//Rutas Web 
 
-app.get('/servicios', function(req, res){
-	res.render("servicio", {title: "Servicios"});
-});
-
-// Without middleware
-app.get('/', function(req, res){
-	res.send("ggde");
-});
+app.use('/', require('./router/rutasWeb'));
+app.use('/mascotas', require('./router/mascotas'));
 
 
-app.listen(port, function(err){
+/*app.listen(port, function(err){
 	if (err) console.log(err);
 	console.log("Server listening on port", port);
-});
+});*/
 
 app.use((req, res, next) => {
     res.status(404).render("404" , {
@@ -35,3 +39,8 @@ app.use((req, res, next) => {
         description: "Descriptio"
     })
 })
+
+app.listen(port, function(err){
+	if (err) console.log(err);
+	console.log("Server listening on port", port);
+});
