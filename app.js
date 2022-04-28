@@ -12,11 +12,14 @@ const mongoose = require('mongoose');
 
 //const uri = 'mongodb+srv://nodejs_yt:xSVhWhk7bRYv5GMI@cluster0.dfmua.mongodb.net/veterianaria?retryWrites=true&w=majority';
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
-mongoose.connect(uri)
+
+mongoose.connect(uri, ()=>{
+    console.log("uri", uri);
+})
 .then(() => console.log('BD Exito '))
 .catch(err => console.log("Error", err))
 
-console.log(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL);
 //motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
