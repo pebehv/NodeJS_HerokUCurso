@@ -2,7 +2,7 @@ const { application } = require('express');
 var express = require('express');
 var app = express();
 
-//require('dotenv').config();
+require('dotenv').config();
 
 const port = process.env.PORT || 3000;
 
@@ -10,8 +10,8 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 
 
-const uri = 'mongodb+srv://nodejs_yt:xSVhWhk7bRYv5GMI@cluster0.dfmua.mongodb.net/veterianaria?retryWrites=true&w=majority';
-//const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
+//const uri = 'mongodb+srv://nodejs_yt:xSVhWhk7bRYv5GMI@cluster0.dfmua.mongodb.net/veterianaria?retryWrites=true&w=majority';
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
 
 mongoose.connect(uri, ()=>{
     console.log("uri", uri);
