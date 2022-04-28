@@ -11,10 +11,11 @@ const mongoose = require('mongoose');
 
 
 //const uri = 'mongodb+srv://nodejs_yt:xSVhWhk7bRYv5GMI@cluster0.dfmua.mongodb.net/veterianaria?retryWrites=true&w=majority';
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
+//const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.dfmua.mongodb.net/${process.env.NAMEBD}?retryWrites=true&w=majority`;
 
-mongoose.connect(uri, ()=>{
-    console.log("uri", uri);
+mongoose.connect(process.env.URI, ()=>{
+   // useNewUrlParser: true
+    console.log("uri", process.env.URI);
 })
 .then(() => console.log('BD Exito '))
 .catch(err => console.log("Error", err))
