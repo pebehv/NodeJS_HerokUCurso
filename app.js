@@ -16,7 +16,7 @@ mongoose.connect(uri)
 .then(() => console.log('BD Exito '))
 .catch(err => console.log("Error", err))
 
-//console.log(process.env.DATABASE_URL);
+console.log(process.env.DATABASE_URL);
 //motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
